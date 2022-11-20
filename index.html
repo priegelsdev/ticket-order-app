@@ -37,12 +37,13 @@
       <div class="checkout-total">
 
       </div>
-      <button class="order-btn">Complete order</button>
+      <button class="order-btn" id="order-btn">Complete order</button>
     </div>
   
     <!-- modal rendered out in index.js -->
-    <div class="modal">
+    <div class="modal hidden">
       <div class="modal-inner">
+        <button class="close-modal-btn" id="close-modal-btn">X</button>
         <h2>Enter card details</h2>
         <form>
           <input
@@ -56,7 +57,7 @@
             inputmode="numeric"
             pattern="[0-9\s{13,19}"
             autocomplete="cc-number"
-            maxlength="19"
+            maxlength="16"
             placeholder="Enter card number"
           >
           <input
@@ -65,7 +66,7 @@
             placeholder="Enter CVV"
             maxlength="3"
           >
-          <button class="pay-btn">Pay</button>
+          <button class="pay-btn" id="pay-btn">Pay</button>
         </form>
       </div>
     </div>

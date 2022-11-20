@@ -6,8 +6,16 @@ let totalPrice = 0;
 document.addEventListener('click', function(e) {
   if (e.target.dataset.add) {
     addToCart(e.target.dataset.add);
-  } else {
-    console.log(e.target.id)
+  } else if (e.target.id === 'order-btn') {
+    openModal();
+    document.querySelector('.container').style.opacity = 0.5;
+  } else if (e.target.id === 'pay-btn') {
+    e.preventDefault();
+    console.log('hello');
+  } else if (e.target.id === 'close-modal-btn' ||
+    !e.target.closest(".modal")) {
+    closeModal(); 
+    document.querySelector('.container').style.opacity = 1;
   }
 })
 
@@ -85,10 +93,20 @@ function addToCart(ticketId) {
   renderCheckout();
 }
 
+// create function to open modal 
+
+function openModal() {
+  document.querySelector('.modal').classList.remove('hidden');
+}
+
+function closeModal() {
+  document.querySelector('.modal').classList.add('hidden');
+}
+
 // create render checkout function; remove class "hidden" set to display: none 
 
 function renderCheckout() {
-  document.querySelector(".checkout-container").classList.remove('hidden');
+  document.querySelector('.checkout-container').classList.remove('hidden');
 }
 
 // create render function
