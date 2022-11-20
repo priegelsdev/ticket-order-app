@@ -1,6 +1,7 @@
 import {ticketData} from "/data.js";
 
 let cart = [];
+let totalPrice = 0;
 
 document.addEventListener('click', function(e) {
   if (e.target.dataset.add) {
@@ -42,8 +43,6 @@ function getFeedHtml() {
 
 function addToCart(ticketId) {
   const targetItem = ticketData.filter(ticket => ticket.uuid === ticketId)[0]; 
-  const itemAmountEl = document.querySelector('.item-amount');
-
   let itemAmount = 0;
 
   // if function when targetItem is not already in cart
@@ -58,6 +57,9 @@ function addToCart(ticketId) {
         <h3 class="item-name">${targetItem.name}<span class="remove">remove</span></h3>
         <span class="dollar-tag">$</span><h4 class="item-price">${targetItem.price}</h4>
       </div>`
+
+    totalPrice += targetItem.price;
+
   } else { // or already in cart
     itemAmount = document.getElementById(`${ticketId}`).querySelector('.item-amount')
     let newItemAmount = parseInt(itemAmount.innerHTML);
@@ -68,8 +70,18 @@ function addToCart(ticketId) {
     let addedItemPrice = parseFloat(itemPrice.innerHTML) + targetItem.price;
     let newItemPrice = addedItemPrice.toFixed(2);
     itemPrice.innerHTML = newItemPrice;    
+
+    totalPrice += targetItem.price;
   } 
 
+  // display total amount, rounded down to 2 decimals
+
+  let fixedTotalPrice = totalPrice.toFixed(2);
+
+  document.querySelector('.checkout-total').innerHTML = `
+    <h3 class="total-price-tag">Total Price</h3>
+    <span class="dollar-tag">$</span><h4 class="total-price">${fixedTotalPrice}</h4>
+  `
   renderCheckout();
 }
 
