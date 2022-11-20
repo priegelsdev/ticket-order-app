@@ -30,7 +30,7 @@ function getFeedHtml() {
           <h4 class="item-price">$${ticket.price}</h4>
         </div>
       
-        <button class="add-btn" id="add-btn" data-add=${ticket.uuid}>+</button>
+        <button class="add-btn" id="add-btn" data-add="${ticket.uuid}">+</button>
       </div>
       ` 
   })
@@ -41,28 +41,10 @@ function getFeedHtml() {
 // create add to cart function
 
 function addToCart(ticketId) {
-/*   const targetItemObj = ticketData.filter(ticket => {
-    ticket.uuid === ticketId
-  })[0]
- */
-
-  let targetItem = ticketData.filter(ticket => { ticket.uuid === ticketId })[0]; 
-
-  console.log(ticketData[0])
-  console.log(ticketData.filter(ticket => { ticket.price > 6})[0])
-  console.log(targetItem);
-
-/*   ticketData.forEach(ticket => {
-
-    if (ticket.uuid) {
-      cart.push('1');
-    }
-  })
-
-  console.log(cart); */
-
-  //  ${item.uuid}
-
+  const targetItem = ticketData.filter(ticket => ticket.uuid === ticketId)[0]; 
+  cart.push(targetItem);
+  
+  return cart;
 }
 
 // create render function
