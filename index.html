@@ -21,12 +21,12 @@
   </header>
   
   <main>
-
+    <!-- item-feed to be rendered out in index.js -->
     <div class="container item-feed">
     
 
     </div>
-
+    <!-- checkout container to be rendered out in index.js -->
     <div class="checkout-container hidden">
       <h2>Your order</h2>
       <div class="checkout-feed">
@@ -35,12 +35,42 @@
         </div>
       </div>
       <div class="checkout-total">
-        <h3 class="total-price-tag">TICKET PRICE</h3>
-        <h4 class="total-price">$TOTAL PRICE</h4>
+
       </div>
       <button class="order-btn">Complete order</button>
     </div>
   
+    <!-- modal rendered out in index.js -->
+    <div class="modal">
+      <div class="modal-inner">
+        <h2>Enter card details</h2>
+        <form>
+          <input
+            class="form-name"
+            type="text"
+            placeholder="Enter your name"
+          >
+          <input
+            class="form-card"
+            type="tel"
+            inputmode="numeric"
+            pattern="[0-9\s{13,19}"
+            autocomplete="cc-number"
+            maxlength="19"
+            placeholder="Enter card number"
+          >
+          <input
+            class="form-cvv"
+            type="text"
+            placeholder="Enter CVV"
+            maxlength="3"
+          >
+          <button class="pay-btn">Pay</button>
+        </form>
+      </div>
+    </div>
+
+
   </main>
 
   <script src="index.js" type="module"></script>
