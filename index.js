@@ -42,24 +42,35 @@ function getFeedHtml() {
 
 function addToCart(ticketId) {
   const targetItem = ticketData.filter(ticket => ticket.uuid === ticketId)[0]; 
-  
+  const itemAmountEl = document.querySelector('.item-amount');
+
+  let itemAmount = 0;
+
+  // if function when targetItem is not already in cart
+
   if (!cart.includes(targetItem)) {
     cart.push(targetItem);
-    renderCheckout();
+    itemAmount++;
+
     document.querySelector('.checkout-feed').innerHTML += `
-      <div class="checkout-item">
-        <p class="item-amount">1x</p> 
+      <div class="checkout-item" id="${ticketId}">
+        <p class="item-amount">${itemAmount}</p><span class="amount-factor">x</span>
         <h3 class="item-name">${targetItem.name}<span class="remove">remove</span></h3>
-        <h4 class="item-price">$${targetItem.price}</h4>
+        <span class="dollar-tag">$</span><h4 class="item-price">${targetItem.price}</h4>
       </div>`
-  } else {
-    
+  } else { // or already in cart
+    itemAmount = document.getElementById(`${ticketId}`).querySelector('.item-amount')
+    let newItemAmount = parseInt(itemAmount.innerHTML);
+    newItemAmount++;
+    itemAmount.innerHTML = newItemAmount;
+
+    let itemPrice = document.getElementById(`${ticketId}`).querySelector('.item-price');
+    let addedItemPrice = parseFloat(itemPrice.innerHTML) + targetItem.price;
+    let newItemPrice = addedItemPrice.toFixed(2);
+    itemPrice.innerHTML = newItemPrice;    
   } 
 
-
-  
-
-
+  renderCheckout();
 }
 
 // create render checkout function; remove class "hidden" set to display: none 
