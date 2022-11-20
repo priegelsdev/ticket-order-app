@@ -42,9 +42,30 @@ function getFeedHtml() {
 
 function addToCart(ticketId) {
   const targetItem = ticketData.filter(ticket => ticket.uuid === ticketId)[0]; 
-  cart.push(targetItem);
   
-  return cart;
+  if (!cart.includes(targetItem)) {
+    cart.push(targetItem);
+    renderCheckout();
+    document.querySelector('.checkout-feed').innerHTML += `
+      <div class="checkout-item">
+        <p class="item-amount">1x</p> 
+        <h3 class="item-name">${targetItem.name}<span class="remove">remove</span></h3>
+        <h4 class="item-price">$${targetItem.price}</h4>
+      </div>`
+  } else {
+    
+  } 
+
+
+  
+
+
+}
+
+// create render checkout function; remove class "hidden" set to display: none 
+
+function renderCheckout() {
+  document.querySelector(".checkout-container").classList.remove('hidden');
 }
 
 // create render function
