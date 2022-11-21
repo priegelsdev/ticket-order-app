@@ -97,13 +97,7 @@ function addToCart(ticketId) {
 
   // display total amount, rounded down to 2 decimals
 
-  let fixedTotalPrice = totalPrice.toFixed(2);
-  let checkoutHtml = `
-    <h3 class="total-price-tag">Total Price</h3>
-    <span class="dollar-tag">$</span><h4 class="total-price">${fixedTotalPrice}</h4>
-  `
 
-  document.querySelector('.checkout-total').innerHTML = checkoutHtml;
   
   renderCheckout();
 
@@ -146,6 +140,7 @@ function renderCart() {
 
   let cartFeedHtml = ''
   let checkoutFeedEl = document.querySelector('.checkout-feed');
+  let total = 0;
 
   cart.forEach(item => {
     let updatedPrice = (item.amount * item.price).toFixed(2)
@@ -158,7 +153,18 @@ function renderCart() {
     `   
     cartFeedHtml += cartItemHtml;
     checkoutFeedEl.innerHTML = cartFeedHtml;
+    
+    total += parseFloat(updatedPrice);
   })
+
+  totalPrice = total.toFixed(2);
+
+  let checkoutHtml = `
+  <h3 class="total-price-tag">Total Price</h3>
+  <span class="dollar-tag">$</span><h4 class="total-price">${totalPrice}</h4>
+`
+
+document.querySelector('.checkout-total').innerHTML = checkoutHtml;
 }
 
 // create render checkout function; remove class "hidden" set to display: none 
