@@ -5,21 +5,24 @@ export let ticketData = [{
     'img': '/img/kendrick.jpg',
     'description': 'Live hip hop concert in Cologne',
     'price': 39.99,
-    'uuid': ''
+    'uuid': '',
+    'amount': 0
   },
   {
     'name': 'Bicep',
     'img': '/img/bicep.jpg',
     'description': 'Live techno concert in Berlin',
     'price': 30.00,
-    'uuid': ''
+    'uuid': '',
+    'amount': 0
   },
   {
     'name': 'Ice Hockey Match',
     'img': '/img/icehockey.jpg',
     'description': 'Live ice hockey match in Hanover',
     'price': 14.95,
-    'uuid': ''
+    'uuid': '',
+    'amount': 0
   }]
 
   ticketData.forEach(ticket => { ticket.uuid = uuidv4() } )
