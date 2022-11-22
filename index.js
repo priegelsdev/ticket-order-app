@@ -8,18 +8,15 @@ document.addEventListener('click', function(e) {
     addToCart(e.target.dataset.add);
   } else if (e.target.id === 'order-btn') {
     openModal();
-    document.querySelector('.container').style.opacity = 0.5;
   }
     else if (e.target.dataset.remove) {
     removeItem(e.target.dataset.remove);
-    console.log('removed')
   } else if (e.target.id === 'pay-btn') {
     e.preventDefault();
-    console.log('hello');
+    handlePayBtnClick();
   } else if (e.target.id === 'close-modal-btn' ||
     !e.target.closest(".modal")) {
     closeModal(); 
-    document.querySelector('.container').style.opacity = 1;
   }
 })
 
@@ -78,7 +75,6 @@ function removeItem(ticketId) {
   if (targetItem.amount === 1) {
     targetItem.amount--;
     cart = cart.filter(item => item != targetItem)
-    console.log(cart)
   } else if (targetItem.amount > 1){
     targetItem.amount--;
   }
@@ -97,6 +93,16 @@ function openModal() {
 function closeModal() {
   document.querySelector('.modal').classList.add('hidden');
 }
+
+// create function to handle pay button click
+
+function handlePayBtnClick() {
+  closeModal();
+  document.querySelector('.checkout-container').classList.add('hidden');
+  document.querySelector('.confirmation-container').classList.remove('hidden');
+  cart = [];
+}
+
 
 // create render cart function; looping through array of cart and rendering HTML elements
 

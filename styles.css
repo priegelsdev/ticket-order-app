@@ -161,7 +161,6 @@ header {
 /** MODAL **/
 
 .modal {
-  border: 1px solid purple;
   border-radius: 3px;
   background-color: lightblue;
   position: fixed;
@@ -172,6 +171,8 @@ header {
   left: 0;
   right: 0;
   margin: auto;
+  -webkit-box-shadow: 0px 0px 31px 32px rgba(0,0,0,0.3); 
+  box-shadow: 0px 0px 31px 32px rgba(0,0,0,0.3);
 }
 
 .modal-inner {
@@ -237,3 +238,10 @@ input[type=number] {
   -moz-appearance: textfield;
 }
 
+.confirmation-container {
+  background-color: #8db5ff;
+  text-align: center;
+  border: none;
+  border-radius: 4px;
+  padding: 20px;
+}
