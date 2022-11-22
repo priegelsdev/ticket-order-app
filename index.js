@@ -12,6 +12,7 @@ document.addEventListener('click', function(e) {
   }
     else if (e.target.dataset.remove) {
     removeItem(e.target.dataset.remove);
+    console.log('removed')
   } else if (e.target.id === 'pay-btn') {
     e.preventDefault();
     console.log('hello');
@@ -63,72 +64,35 @@ function addToCart(ticketId) {
   } else {
     targetItem.amount++;
   }
-
-
-
-/* 
-
-    cart.push(targetItem);
-    itemAmount++;
-    let cartItemHtml = `
-      <div class="checkout-item" id="${ticketId}">
-        <p class="item-amount">${itemAmount}</p><span class="amount-factor">x</span>
-        <h3 class="item-name">${targetItem.name}<span class="remove" id="remove" data-remove="${targetItem.uuid}">remove</span></h3>
-        <span class="dollar-tag">$</span><h4 class="item-price">${targetItem.price}</h4>
-      </div>
-      `
-    document.querySelector('.checkout-feed').innerHTML += cartItemHtml;
-
-    totalPrice += targetItem.price;
-
-  } else { // or already in cart
-    itemAmount = document.getElementById(`${ticketId}`).querySelector('.item-amount')
-    let newItemAmount = parseInt(itemAmount.innerHTML);
-    newItemAmount++;
-    itemAmount.innerHTML = newItemAmount;
-
-    let itemPrice = document.getElementById(`${ticketId}`).querySelector('.item-price');
-    let addedItemPrice = parseFloat(itemPrice.innerHTML) + targetItem.price;
-    let newItemPrice = addedItemPrice.toFixed(2);
-    itemPrice.innerHTML = newItemPrice;    
-
-    totalPrice += targetItem.price; */
-  
-
-  // display total amount, rounded down to 2 decimals
-
-
   
   renderCheckout();
-
-  return cart;
 }
 
 // create function to remove item 
+
 function removeItem(ticketId) {
   const targetItem = ticketData.filter(ticket => ticket.uuid === ticketId)[0]; 
-  let itemAmount = parseInt(document.querySelector('.item-amount').innerHTML);
 
-  if (cart.includes(targetItem) && itemAmount === 1) {
-    cart.splice(0, 1);
+  // if function when targetItem is not already in cart
 
-    console.log(itemAmount);
-    console.log(itemAmount)
-    let cartItemHtml = `
-      <div class="checkout-item" id="${ticketId}">
-        <p class="item-amount">${itemAmount}</p><span class="amount-factor">x</span>
-        <h3 class="item-name">${targetItem.name}<span class="remove" id="remove" data-remove="${targetItem.uuid}">remove</span></h3>
-        <span class="dollar-tag">$</span><h4 class="item-price">${targetItem.price}</h4>
-      </div>
-      `
-    document.querySelector('.checkout-feed').innerHTML -= cartItemHtml;
+  if (targetItem.amount === 1) {
+    targetItem.amount--;
+    cart = cart.filter(item => item != targetItem)
+    console.log(cart)
+  } else if (targetItem.amount > 1){
+    targetItem.amount--;
   }
+  
+  renderCheckout();
 }
+
 // create function to open modal 
 
 function openModal() {
   document.querySelector('.modal').classList.remove('hidden');
 }
+
+// create function to close modal 
 
 function closeModal() {
   document.querySelector('.modal').classList.add('hidden');
@@ -146,9 +110,9 @@ function renderCart() {
     let updatedPrice = (item.amount * item.price).toFixed(2)
     let cartItemHtml = `
     <div class="checkout-item">
-      <p class="item-amount" id="${item.uuid}" data-amount="${item.uuid}">${item.amount}</p><span class="amount-factor">x</span>
+      <p class="item-amount">${item.amount}x</p>
       <h3 class="item-name">${item.name}<span class="remove" id="remove" data-remove="${item.uuid}">remove</span></h3>
-      <span class="dollar-tag">$</span><h4 class="item-price">${updatedPrice}</h4>
+      <h4 class="item-price">$${updatedPrice}</h4>
     </div>
     `   
     cartFeedHtml += cartItemHtml;
@@ -160,11 +124,15 @@ function renderCart() {
   totalPrice = total.toFixed(2);
 
   let checkoutHtml = `
-  <h3 class="total-price-tag">Total Price</h3>
-  <span class="dollar-tag">$</span><h4 class="total-price">${totalPrice}</h4>
-`
+    <h3 class="total-price-tag">Total Price</h3>
+    <h4 class="total-price">$${totalPrice}</h4>
+  `
 
-document.querySelector('.checkout-total').innerHTML = checkoutHtml;
+  document.querySelector('.checkout-total').innerHTML = checkoutHtml;
+
+  if (cart.length === 0) {
+    document.querySelector('.checkout-container').classList.add('hidden');
+  }
 }
 
 // create render checkout function; remove class "hidden" set to display: none 
