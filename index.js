@@ -97,10 +97,23 @@ function closeModal() {
 // create function to handle pay button click
 
 function handlePayBtnClick() {
-  closeModal();
-  document.querySelector('.checkout-container').classList.add('hidden');
-  document.querySelector('.confirmation-container').classList.remove('hidden');
-  cart = [];
+  let name = document.querySelector('.form-name').value;
+  let creditCard = document.querySelector('.form-card').value;
+  let cvv = document.querySelector('.form-cvv').value;
+
+
+  if (name != '' && creditCard != '' && cvv != '') {
+    let confirmationHtmlText = `<h3>Thanks ${name}! Your order is on its way.</h3>`;
+
+    closeModal();
+    document.querySelector('.checkout-container').classList.add('hidden');
+    document.querySelector('.confirmation-container').innerHTML = confirmationHtmlText;
+    document.querySelector('.confirmation-container').classList.remove('hidden');
+    cart = [];
+  } else {
+    alert('Please fill out all fields!');
+  }
+
 }
 
 
@@ -138,6 +151,8 @@ function renderCart() {
 
   if (cart.length === 0) {
     document.querySelector('.checkout-container').classList.add('hidden');
+  } else if (document.querySelector('.confirmation-container').classList != 'hidden') {
+    document.querySelector('.confirmation-container').classList.add('hidden');
   }
 }
 

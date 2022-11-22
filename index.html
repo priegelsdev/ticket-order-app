@@ -45,12 +45,12 @@
       <div class="modal-inner">
         <button class="close-modal-btn" id="close-modal-btn">X</button>
         <h2>Enter card details</h2>
-        <form>
+        <form class="order-form" name="order-form">
           <input
             class="form-name"
             type="text"
             placeholder="Enter your name"
-          >
+            required>
           <input
             class="form-card"
             type="tel"
@@ -59,20 +59,20 @@
             autocomplete="cc-number"
             maxlength="16"
             placeholder="Enter card number"
-          >
+            required>
           <input
             class="form-cvv"
             type="text"
             placeholder="Enter CVV"
             maxlength="3"
-          >
-          <button class="pay-btn" id="pay-btn">Pay</button>
+            required>
+          <button type="submit" class="pay-btn" id="pay-btn">Pay</button>
         </form>
       </div>
     </div>
 
     <div class="confirmation-container hidden">
-      <h3>Thanks, NAME! Your order is on its way!</h3>
+      <!-- text rendered by index.js -->
     </div>
 
   </main>
