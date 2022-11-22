@@ -32,7 +32,7 @@ function getFeedHtml() {
 
     itemFeedHtml += `
       <div class="item-container">
-        <img src="https://via.placeholder.com/150" class="item-img">
+        <img src="${ticket.img}" class="item-img">
       
         <div class="text-container">
           <h3 class="item-name">${ticket.name}</h3>

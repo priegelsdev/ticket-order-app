@@ -10,7 +10,7 @@ export let ticketData = [{
   },
   {
     'name': 'Bicep',
-    'img': '/img/bicep.jpg',
+    'img': '/img/bicep.jpeg',
     'description': 'Live techno concert in Berlin',
     'price': 30.00,
     'uuid': '',
@@ -18,7 +18,7 @@ export let ticketData = [{
   },
   {
     'name': 'Ice Hockey Match',
-    'img': '/img/icehockey.jpg',
+    'img': '/img/icehockey.png',
     'description': 'Live ice hockey match in Hanover',
     'price': 14.95,
     'uuid': '',
